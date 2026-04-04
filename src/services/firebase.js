@@ -12,6 +12,7 @@
  *  - signInAnonymouslyAndGetUser() : sign in anonymously, returns User
  *  - createPost(postData)          : write a new post document
  *  - getOrCreateChat(postId, responderId) : find or create a chat document
+ *  - createSponsoredPost(postData) : write a sponsored post to sponsored_posts
  */
 import { initializeApp } from 'firebase/app';
 import {
@@ -141,6 +142,34 @@ export async function getOrCreateChat(postId, responderId) {
     return chatId;
   } catch (error) {
     console.error('[firebase] getOrCreateChat error:', error);
+    throw error;
+  }
+}
+
+/**
+ * Writes a new sponsored post document to the `sponsored_posts` collection.
+ *
+ * Sponsored posts include an `isSponsored` flag, a business name, a call-to-action
+ * URL, and an `approved` moderation flag (default false – admin must approve).
+ *
+ * @param {Object} postData
+ * @param {string} postData.businessName
+ * @param {string} postData.message
+ * @param {string} [postData.ctaUrl]
+ * @param {{ latitude: number, longitude: number }} postData.coordinates
+ * @returns {Promise<import('firebase/firestore').DocumentReference>}
+ */
+export async function createSponsoredPost(postData) {
+  try {
+    const docRef = await addDoc(collection(db, 'sponsored_posts'), {
+      ...postData,
+      isSponsored: true,
+      approved: false,
+      createdAt: serverTimestamp(),
+    });
+    return docRef;
+  } catch (error) {
+    console.error('[firebase] createSponsoredPost error:', error);
     throw error;
   }
 }
