@@ -4,6 +4,8 @@
     "slug": "toctoc-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "sdkVersion": "50.0.0",
+    "platforms": ["ios", "android"],
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -26,7 +28,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#6C63FF"
       },
-      "package": "com.toctoc.app"
+      "package": "com.toctoc.app",
+      "versionCode": 1,
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
