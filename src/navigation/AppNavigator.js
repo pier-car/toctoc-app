@@ -30,6 +30,7 @@ import HomeScreen from '../screens/HomeScreen';
 import NewPostScreen from '../screens/NewPostScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import FlyerScreen from '../screens/FlyerScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -161,6 +162,11 @@ export default function AppNavigator() {
               )}`
             : 'Chat',
         })}
+      />
+      <Stack.Screen
+        name="Flyer"
+        component={FlyerScreen}
+        options={{ title: 'Volantino Condominio' }}
       />
     </Stack.Navigator>
   );

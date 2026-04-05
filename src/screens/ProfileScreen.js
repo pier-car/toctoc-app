@@ -19,6 +19,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth, signInAnonymouslyAndGetUser } from '../services/firebase';
 
 export default function ProfileScreen() {
@@ -28,7 +29,7 @@ export default function ProfileScreen() {
   useEffect(() => {
     // Listen for auth state changes; set up listener synchronously so the
     // cleanup always has the correct unsubscribe reference.
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUserId(user?.uid ?? null);
     });
 
@@ -55,7 +56,7 @@ export default function ProfileScreen() {
             setResetting(true);
             try {
               // Sign out first so that Firebase creates a brand-new anonymous account.
-              await auth.signOut();
+              await signOut(auth);
               const user = await signInAnonymouslyAndGetUser();
               setUserId(user.uid);
             } catch (err) {
