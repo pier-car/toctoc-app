@@ -23,10 +23,9 @@ import {
   Platform,
   Share,
 } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
 import * as Clipboard from 'expo-clipboard';
 import * as Sharing from 'expo-sharing';
-import { Share2, Copy, ChevronDown, ChevronUp } from 'lucide-react-native';
+import { Share2, Clipboard as ClipboardIcon, ChevronDown, ChevronUp } from 'lucide-react-native';
 
 import { auth } from '../services/firebase';
 import {
@@ -34,6 +33,14 @@ import {
   generateFlyerShareMessage,
   trackInviteSent,
 } from '../services/GrowthService';
+
+// Safe QRCode import – falls back to a placeholder if the native module is unavailable.
+let QRCode;
+try {
+  QRCode = require('react-native-qrcode-svg').default;
+} catch (e) {
+  QRCode = null;
+}
 
 // Default building ID – in a production app this would come from the user's
 // profile or from the location-based building detection flow.
@@ -109,13 +116,19 @@ export default function FlyerScreen() {
 
           {/* QR Code */}
           <View style={styles.qrWrapper}>
-            <QRCode
-              value={inviteUrl}
-              size={180}
-              color="#111827"
-              backgroundColor="#FFFFFF"
-              ecl="M"
-            />
+            {QRCode ? (
+              <QRCode
+                value={inviteUrl}
+                size={180}
+                color="#111827"
+                backgroundColor="#FFFFFF"
+                ecl="M"
+              />
+            ) : (
+              <View style={styles.qrPlaceholder}>
+                <Text style={styles.qrPlaceholderText}>QR Code</Text>
+              </View>
+            )}
           </View>
 
           <Text style={styles.flyerUrl} numberOfLines={1}>
@@ -153,7 +166,7 @@ export default function FlyerScreen() {
           accessibilityRole="button"
           style={styles.secondaryButton}
         >
-          <Copy size={16} color="#6C63FF" strokeWidth={2} />
+          <ClipboardIcon size={16} color="#6C63FF" strokeWidth={2} />
           <Text style={styles.secondaryButtonText}>
             {copied ? '✅ Link copiato!' : 'Copia link'}
           </Text>
@@ -270,6 +283,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E5E7EB',
     marginBottom: 16,
+  },
+  qrPlaceholder: {
+    width: 180,
+    height: 180,
+    backgroundColor: '#E5E7EB',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  qrPlaceholderText: {
+    fontSize: 14,
+    color: '#6B7280',
+    fontWeight: '600',
   },
   flyerUrl: {
     fontSize: 11,

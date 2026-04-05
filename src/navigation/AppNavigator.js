@@ -24,7 +24,7 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home, PlusCircle, MessageSquare, User } from 'lucide-react-native';
+import { Home, Plus, MessageCircle, User } from 'lucide-react-native';
 
 import HomeScreen from '../screens/HomeScreen';
 import NewPostScreen from '../screens/NewPostScreen';
@@ -71,7 +71,7 @@ function PostTabButton({ onPress, accessibilityState }) {
       style={styles.fabWrapper}
     >
       <View style={[styles.fab, focused && styles.fabFocused]}>
-        <PlusCircle size={28} color="#FFFFFF" strokeWidth={2} />
+        <Plus size={28} color="#FFFFFF" strokeWidth={2} />
       </View>
     </TouchableOpacity>
   );
@@ -115,7 +115,7 @@ function TabNavigator() {
         options={{
           tabBarLabel: 'Chats',
           tabBarIcon: ({ color, size }) => (
-            <MessageSquare size={size} color={color} strokeWidth={1.8} />
+            <MessageCircle size={size} color={color} strokeWidth={1.8} />
           ),
         }}
       />

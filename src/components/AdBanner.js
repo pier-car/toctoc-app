@@ -16,7 +16,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { ExternalLink } from 'lucide-react-native';
+import { Share2 } from 'lucide-react-native';
 
 /**
  * @param {Object}  props
@@ -63,7 +63,7 @@ export default function AdBanner({ ad, onPress }) {
           {/* CTA row */}
           <View style={styles.ctaRow}>
             <Text style={styles.ctaText}>Scopri di più</Text>
-            <ExternalLink size={14} color="#B45309" strokeWidth={2} />
+            <Share2 size={14} color="#B45309" strokeWidth={2} />
           </View>
         </View>
       </TouchableOpacity>
