@@ -2,16 +2,17 @@
  * babel.config.js
  *
  * Babel configuration for the TocToc Expo project.
- * Enables the NativeWind Tailwind-in-React-Native transform and
+ * Uses the NativeWind v4 jsxImportSource preset approach and
  * the Reanimated plugin required by react-native-reanimated.
  */
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+    ],
     plugins: [
-      'nativewind/babel',
-      'react-native-reanimated/plugin',
+      "react-native-reanimated/plugin",
     ],
   };
 };

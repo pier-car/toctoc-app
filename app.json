@@ -4,21 +4,15 @@
     "slug": "toctoc-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "sdkVersion": "50.0.0",
+    "sdkVersion": "51.0.0",
     "platforms": ["ios", "android"],
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#6C63FF"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.toctoc.app"
@@ -32,15 +26,12 @@
       "versionCode": 1,
       "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "plugins": [
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "TocToc needs your location to show posts from your building.",
-          "locationWhenInUsePermission": "TocToc needs your location to show posts from your building."
+          "locationAlwaysAndWhenInUsePermission": "TocToc ha bisogno della tua posizione per mostrare gli avvisi del tuo condominio.",
+          "locationWhenInUsePermission": "TocToc ha bisogno della tua posizione per mostrare gli avvisi del tuo condominio."
         }
       ]
     ]
