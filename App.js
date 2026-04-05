@@ -7,6 +7,7 @@
  * Signs in anonymously with Firebase on startup and shows a loading spinner
  * while the auth session initialises.
  */
+import "./global.css";
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
